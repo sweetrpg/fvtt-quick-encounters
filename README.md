@@ -1,26 +1,29 @@
-![Latest Release Download Count](https://img.shields.io/badge/dynamic/json?label=Downloads@latest&query=assets%5B1%5D.download_count&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fspetzel2020%2Fquick-encounters%2Freleases%2Flatest)
-![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fquick-encounters&colorB=4aa94a)
+![Latest Release Download Count](https://img.shields.io/badge/dynamic/json?label=Downloads@latest&query=assets%5B1%5D.download_count&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fsweetrpg%2Ffvtt-quick-encounters%2Freleases%2Flatest)
+![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fquick-encounters-2&colorB=4aa94a)
 
 # Quick Encounters
+
+## 13 - Continued
+
 ## 12 - Last planned release
-* QE v12 supports Foundry v10-v12, and will be the last planned release of QE
-* Bugs fixed: See [Release Notes](https://github.com/spetzel2020/quick-encounters/blob/master/CHANGELOG.md)
+* QE v12 supports Foundry v10-v12, and ~~will be the last planned release of QE~~
+* Bugs fixed: See [Release Notes](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/CHANGELOG.md)
 ## 1.2
-* New feature: [#123](https://github.com/spetzel2020/quick-encounters/issues/123): New option to automatically add Player Tokens to the Combat Tracker
-* Support more generalized dice rolls see [#137](https://github.com/spetzel2020/quick-encounters/issues/137)
+* New feature: [#123](https://github.com/sweetrpg/fvtt-quick-encounters/issues/123): New option to automatically add Player Tokens to the Combat Tracker
+* Support more generalized dice rolls see [#137](https://github.com/sweetrpg/fvtt-quick-encounters/issues/137)
 * Compatible with Foundry v9 - v12
-* Bugs fixed: See [Release Notes](https://github.com/spetzel2020/quick-encounters/blob/master/CHANGELOG.md)
+* Bugs fixed: See [Release Notes](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/CHANGELOG.md)
 ## 1.1
 * New features: Default folder for Quick Encounters (Issue #94), Add Actor RollTables from Journal Entries (Issue #40) - see new Settings
-* Bugs fixed: See [Release Notes](https://github.com/spetzel2020/quick-encounters/blob/master/CHANGELOG.md)
+* Bugs fixed: See [Release Notes](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/CHANGELOG.md)
 
 ## 1.0
 * v1.0.8 now working with Foundry v9 & v10
-* Bugs fixed: See [Release Notes](https://github.com/spetzel2020/quick-encounters/blob/master/CHANGELOG.md)
+* Bugs fixed: See [Release Notes](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/CHANGELOG.md)
 * Instant Encounters: Enable the new Setting, then you can drag your Quick Encounter directly from Journals to the Scene and be prompted to run it immediately! Perfect for Random or Wandering Encounters.
 
 * **Author**: Spetzel#0103
-* **Version**: 12.1 
+* **Version**: 12.1
 * **Foundry VTT Compatibility**: 10-12
 * **System Compatibility (If applicable)**: All; additional features for dnd5e
 * **Translation Support**: en, es (thanks [lozalojo!](https://github.com/lozalojo)), ja (thanks "touge"!), de (thanks @Fallayn#6414), it (thanks [riccisi](https://github.com/riccisi))
@@ -40,7 +43,7 @@ Quick Encounters works well with [TokenMold](https://github.com/Moerill/token-mo
 
 # Install
 1. Go to the "Add-on Modules" tab in Foundry Setup
-2. Click "Install Module" and search for **Quick Encounters** OR paste this link: "https://github.com/spetzel2020/quick-encounters/releases/latest/download/module.json"
+2. Click "Install Module" and search for **Quick Encounters** OR paste this link: "https://github.com/sweetrpg/fvtt-quick-encounters/releases/latest/download/module.json"
 3. Open your world and go to Settings>Manage Modules and enable Quick Encounters
 
 # Using Quick Encounters
@@ -74,12 +77,12 @@ If you have BOTH Tokens and Tiles you want in your Quick Encounter, create the Q
 Coming soon: Drag-and-drop for tokens, tiles, and other stuff!
 
 ## The Quick Encounter dialog
-![QuickEncounterDialog](https://github.com/spetzel2020/quick-encounters/blob/master/img/CompanionDialog.png)
+![QuickEncounterDialog](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/img/CompanionDialog.png)
 
 ## Contributions
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T82XFQD)
 
 ## License
-**Quick Encounters for Foundry VTT** by Jeffrey Pugh is licensed under the [GNU General Public License v3.0](https://github.com/spetzel2020/quick-encounters/blob/master/LICENSE)
+**Quick Encounters for Foundry VTT** by Jeffrey Pugh is licensed under the [GNU General Public License v3.0](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/LICENSE)
 
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development v 0.1.6](http://foundryvtt.com/pages/license.html).
