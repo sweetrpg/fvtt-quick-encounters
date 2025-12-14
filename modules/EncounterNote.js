@@ -21,15 +21,15 @@ Subsequently can add: (a) Drag additional tokens in, (b) populate the Combat Tra
 7-Dec-2020      v0.6.13: delete(): Delete ALL of the Notes (in this or other Scenes) associated with the delete journal Entry
                         EncounterNote.create() and .place() return newNote so that we can store that in the quickEncounter before serialization
                         Expand the available list of Note icons (perhaps would be good to have a Setting to allow/disallow this)
-8-Aug-2021      0.8.3a: If Foundryv8 then don't do Note deletion in the current scene because new Journal._onDelete() method takes care of that  
-                        (although because of https://gitlab.com/foundrynet/foundryvtt/-/issues/5700 this won't work at all currently)  
-15-Nov-2021     v0.9.1b: Issue #57 Reintroduce deleltion of notes; doesn't seem to be handled in Foundry 0.8.9     
-6-Dec-2021      0.9.3a: Check for Foundry 0.9 OR 0.8   
-15-Dec-2021     0.9.3f: EncounterNote.create(): Check/fix deprecation warning by using canvas.scene.embeddedDocuments()      
-21-Dec-2021     0.9.5a: Use QuickEncounter.isFoundryV8Plus test   
-17-Feb-2022     1.0.1a: Add Hook on dropCanvasData to intercept creation of Notes for Quick Encounters      
-26-Feb-2022     1.0.1d: checkForInstantEncounter(): pass new options variable with IE information to QuickEncounter.run()  
-3-Mar-2022     1.0.1f: Fixed #84 delete(): corrected to use deleteEmbeddedDocuments()              
+8-Aug-2021      0.8.3a: If Foundryv8 then don't do Note deletion in the current scene because new Journal._onDelete() method takes care of that
+                        (although because of https://gitlab.com/foundrynet/foundryvtt/-/issues/5700 this won't work at all currently)
+15-Nov-2021     v0.9.1b: Issue #57 Reintroduce deleltion of notes; doesn't seem to be handled in Foundry 0.8.9
+6-Dec-2021      0.9.3a: Check for Foundry 0.9 OR 0.8
+15-Dec-2021     0.9.3f: EncounterNote.create(): Check/fix deprecation warning by using canvas.scene.embeddedDocuments()
+21-Dec-2021     0.9.5a: Use QuickEncounter.isFoundryV8Plus test
+17-Feb-2022     1.0.1a: Add Hook on dropCanvasData to intercept creation of Notes for Quick Encounters
+26-Feb-2022     1.0.1d: checkForInstantEncounter(): pass new options variable with IE information to QuickEncounter.run()
+3-Mar-2022     1.0.1f: Fixed #84 delete(): corrected to use deleteEmbeddedDocuments()
 4-May-2022      1.0.2b: Fixed: Misspelled poison.svg in moreNoteIcons
 31-Aug-2022     1.0.4k: Get parent JournalEntry for JournalEntryPage (because Notes are associated with Journal Entries)
 1-Sep-2022      1.0.4k: Move getEncounterScene() to EncounterNote from QuickEncounter
@@ -39,16 +39,16 @@ Subsequently can add: (a) Drag additional tokens in, (b) populate the Combat Tra
                 delete(): More deprecation warnings
                 create(): Typo in entryId
                 1.0.4m: dropCanvasData Hook: Check first JournalEntryPage for a QE (FIX: Should check all)
-3-Oct-2022      1.0.7a: Issue #109: Check for FoundryV10 when referencing journalEntryPage or journalEntry.parent   
-6-Oct-2022      1.0.8a: Issue #112: Further references to JournalEntryPage    
+3-Oct-2022      1.0.7a: Issue #109: Check for FoundryV10 when referencing journalEntryPage or journalEntry.parent
+6-Oct-2022      1.0.8a: Issue #112: Further references to JournalEntryPage
 25-Apr-2023     1.1.5a: Issue #132: Intercept drag of JEPage just like Journal Entries (replace if it has a QE in it)
                 Hooks.on('dropCanvasData'): Add check for JournalEntryPage and add common function checkForQEAndCreateNote()
                 create(): Remove check for FoundryV10 and switch to parentJournalEntry
                 Re-clone _onDropData() from foundry.js to account for new Note fields (for JournalEntryPage)
-29-May-2023     1.1.5b: Changed isFoundryV10 to isFoundryV10Plus (to support checks for Foundry V11)    
-21-May-2024     1.2.3d: v12: Switch (optionally) to new foundry.utils.mergeObject()  
-23-May-2024     1.2.3e: class EncounterNote: Move icon and iconTint into texture (supposedly deprecated since v10) 
-17-Jun-2024     12.1.0d:Replace cls.create() with getDocumentClass("cls").create     
+29-May-2023     1.1.5b: Changed isFoundryV10 to isFoundryV10Plus (to support checks for Foundry V11)
+21-May-2024     1.2.3d: v12: Switch (optionally) to new foundry.utils.mergeObject()
+23-May-2024     1.2.3e: class EncounterNote: Move icon and iconTint into texture (supposedly deprecated since v10)
+17-Jun-2024     12.1.0d:Replace cls.create() with getDocumentClass("cls").create
 */
 
 //Expand the available list of Note icons
@@ -66,12 +66,12 @@ const moreNoteIcons = {
     "Daze" : "icons/svg/daze.svg",
     "Deaf" : "icons/svg/deaf.svg",
     "Direction" : "icons/svg/direction.svg",
-    "Door-Closed" : "icons/svg/door-closed.svg",   
-    "Door-Exit" : "icons/svg/door-exit.svg",    
+    "Door-Closed" : "icons/svg/door-closed.svg",
+    "Door-Exit" : "icons/svg/door-exit.svg",
     "Down" : "icons/svg/down.svg",
     "Explosion" : "icons/svg/explosion.svg",
     "Eye" : "icons/svg/eye.svg",
-    "Falling" : "icons/svg/falling.svg",    
+    "Falling" : "icons/svg/falling.svg",
     "Frozen" : "icons/svg/frozen.svg",
     "Hazard" : "icons/svg/hazard.svg",
     "Heal" : "icons/svg/heal.svg",
@@ -79,16 +79,16 @@ const moreNoteIcons = {
     "Ice Aura" : "icons/svg/ice-aura.svg",
     "Lightning" : "icons/svg/lightning.svg",
     "Net" : "icons/svg/net.svg",
-    "Padlock" : "icons/svg/padlock.svg",   
+    "Padlock" : "icons/svg/padlock.svg",
     "Paralysis" : "icons/svg/paralysis.svg",
     "Poison" : "icons/svg/poison.svg",
     "Radiation" : "icons/svg/radiation.svg",
     "Sleep" : "icons/svg/sleep.svg",
-    "Sound" : "icons/svg/sound.svg",  
+    "Sound" : "icons/svg/sound.svg",
     "Sun" : "icons/svg/sun.svg",
-    "Terror" : "icons/svg/terror.svg",   
+    "Terror" : "icons/svg/terror.svg",
     "Up" : "icons/svg/up.svg",
-    "Wing" : "icons/svg/wing.svg"      
+    "Wing" : "icons/svg/wing.svg"
 }
 Object.assign(CONFIG.JournalEntry.noteIcons, moreNoteIcons);
 
@@ -104,8 +104,9 @@ export class EncounterNoteConfig extends NoteConfig {
             title : game.i18n.localize( "QE.Config.TITLE")
         }
         if (QuickEncounter.isFoundryV12Plus) {
-            defaultOptions = foundry.utils.mergeObject(super.defaultOptions, addedOptions); 
-        } else {
+            defaultOptions = foundry.utils.mergeObject(super.defaultOptions, addedOptions);
+        }
+        else {
             defaultOptions = mergeObject(super.defaultOptions, addedOptions);
         }
         return defaultOptions;
@@ -150,7 +151,7 @@ export class EncounterNote {
 
     static async delete(journalEntry) {
         //1.0.4k: This should always be a real parent JournalEntry
-        
+
         if (!game.user.isGM) {return;}
         //Create filtered array of matching Notes for each scene
         let matchingNoteIds;
@@ -158,9 +159,11 @@ export class EncounterNote {
         for (const scene of game.scenes) {
             if (QuickEncounter.isFoundryV10Plus) {
                 matchingNoteIds = Array.from(scene.notes?.values()).filter(nd => nd.entryId === journalEntry.id).map(note => note.id);
-            } else if (QuickEncounter.isFoundryV8Plus) {
+            }
+            else if (QuickEncounter.isFoundryV8Plus) {
                 matchingNoteIds = Array.from(scene.data.notes.values()).filter(nd => nd.data.entryId === journalEntry.id).map(note => note.id);
-            } else {
+            }
+            else {
                 matchingNoteIds = scene.data.notes.filter(nd => nd.entryId === journalEntry.id).map(note => note._id);
             }
             if (!matchingNoteIds?.length) {continue;}
@@ -218,13 +221,15 @@ export class EncounterNote {
                 x: quickEncounter.coords.x,
                 y: quickEncounter.coords.y
             }
-        } else if (options.placeDefault) {
+        }
+        else if (options.placeDefault) {
             //Otherwise, place it in the middle of the canvas stage (current view)
             noteAnchor = {
                 x : canvas.stage.pivot.x,
                 y : canvas.stage.pivot.y
             }
-        } else {return;}
+        }
+        else {return;}
         // Validate the final position is in-bounds
         //1.0.4l: Use canvas.stage.hitArea in v10
         const hitArea = QuickEncounter.isFoundryV10Plus ? canvas.stage.hitArea : canvas.grid.hitArea;
@@ -243,21 +248,24 @@ export class EncounterNote {
         const parentJournalEntry = (QuickEncounter.isFoundryV10Plus && (journalEntry instanceof JournalEntryPage)) ? journalEntry.parent : journalEntry;
         //if sceneNote is available, then we're in the Note Scene already
         if (parentJournalEntry.sceneNote) {return game.scenes.viewed;}
-        else {          
+        else {
             //Now we need to search through the available scenes to find a note with this Journal Entry
             for (const scene of game.scenes) {
                 let notes;
                 if (QuickEncounter.isFoundryV10Plus) {
                     notes = scene.notes;
-                } else {
+                }
+                else {
                     notes = scene.data.notes;
                 }
                 let foundNote;
                 if (QuickEncounter.isFoundryV10Plus) {
                     foundNote = Array.from(notes.values()).find(nd => nd.entryId === parentJournalEntry.id);
-                } else if (QuickEncounter.isFoundryV8Plus) {
+                }
+                else if (QuickEncounter.isFoundryV8Plus) {
                     foundNote = Array.from(notes.values()).find(nd => nd.data.entryId === parentJournalEntry.id);
-                } else {
+                }
+                else {
                     foundNote = notes.find(note => note.entryId === parentJournalEntry.id);
                 }
                 if (foundNote) {
@@ -320,10 +328,11 @@ export class EncounterNote {
         let shouldSwitch = false;
         //v0.6.12: Testing parameterization of i18n strings, using Localization.format()
         // If there is an 0612 version use that with a parameter, otherwise there isn't a parameter yet and we do it the pre-0.6.12 way
-        let content; 
+        let content;
         if (game.i18n.has("QE.SwitchScene.CONTENT_v0612", false)) {
             content = game.i18n.format("QE.SwitchScene.CONTENT_v0612", {sceneName : qeScene.name});
-        } else {
+        }
+        else {
             content = game.i18n.localize("QE.SwitchScene.CONTENT") + qeScene.name + "?";
         }
         await Dialog.confirm({
@@ -348,7 +357,7 @@ export class EncounterNote {
                     isInstantEncounter : true,
                     qeAnchor: qeAnchor
                 }
-                quickEncounter.run(event, options) 
+                quickEncounter.run(event, options)
             },
             button2cb : () => EncounterNote.create(quickEncounter, qeAnchor),
             button3cb : null,
@@ -382,7 +391,8 @@ export class EncounterNote {
                 const journalEntryPage0 = journalEntryOrJEPage.pages?.values().next().value;
                 quickEncounter = QuickEncounter.extractQuickEncounterFromJEOrEmbedded(journalEntryPage0);
             }
-        } else { //JournalEntryPage 
+        }
+        else { //JournalEntryPage
             quickEncounter = QuickEncounter.extractQuickEncounterFromJEOrEmbedded(journalEntryOrJEPage);
         }
 
@@ -396,7 +406,8 @@ export class EncounterNote {
             } else {
                 EncounterNote.create(quickEncounter, noteAnchor);
             }
-        } else {
+        }
+        else {
             //create a normal Journal Entry Note
             const noteData = {entryId: journalEntryOrJEPage.id, x: noteAnchor.x, y: noteAnchor.y}
             //Another hack - because we don't have event we recover the raw drop location
@@ -423,21 +434,24 @@ Hooks.on(`renderEncounterNoteConfig`, async (noteConfig, html, data) => {
 //and renderNoteConfig it's too difficult to change the form of the Note
 Hooks.on(`dropCanvasData`, (canvas, data) => {
     //This is a hack because we're basically replicating canvas.notes._onDropData()
-    // Acquire Journal entry 
+    // Acquire Journal entry
     //- because it's async and this hook can't be (otherwise it prematurely returns true and creates a preview) use .then chaining
     //1.1.5 check for either JournalEntry OR JournalEntryPage
     if ((data?.type === "JournalEntry") || (data?.type === "JournalEntryPage")) {
         let cls;
         if (QuickEncounter.isFoundryV12Plus) {
             cls = getDocumentClass(data?.type);
-        } else if (data?.type === "JournalEntry") {
+        }
+        else if (data?.type === "JournalEntry") {
             cls = JournalEntry;
-        } else if (data?.type === "JournalEntryPage") {
+        }
+        else if (data?.type === "JournalEntryPage") {
             cls = JournalEntryPage;
         }
         cls.fromDropData(data).then(j => {
             EncounterNote.checkForQEAndCreateNote(j, data);
         });
-    } else {return true;}   //handle dropping something else
+    }
+    else {return true;}   //handle dropping something else
     return false;   //stop processing - we're replacing Journal Note creation entirely
 });

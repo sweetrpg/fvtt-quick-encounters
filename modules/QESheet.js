@@ -6,43 +6,43 @@ Reused as EncounterCompanionSheet
 9-Nov-2020      v0.6.1d: Change constructor to take combinedTokenData (will be a template for actor-generated data)
 10-Nov-2020     v0.6.1e: Pass quickEncounter so we can key off extracted Actors not tokens
                 v0.6.1f: Change Close to Cancel in dialog (to show it doesn't save) - use i18n tags
-11-Nov-2020     v0.6.1g: Remove journalSheet from constructor    
+11-Nov-2020     v0.6.1g: Remove journalSheet from constructor
 14-Nov-2020     v0.6.1l: If you change the # Actors to 0, remove the Actor completely
 15-Nov-2020     v0.6.1m: Pass event from clicking Run
                 v0.6.1n: If we removed all the Actors, then remove the whole Quick Encounter
-16-Nov-2020     v0.6.3b: Make "number" field a String so we can handle die rolls, a number, and nothing (which means remove the actor)                
+16-Nov-2020     v0.6.3b: Make "number" field a String so we can handle die rolls, a number, and nothing (which means remove the actor)
                          Add validation and warning if you make a mistake
-27-Nov-2020     v0.6.7b: Display compendium info in Companion dialog           
+27-Nov-2020     v0.6.7b: Display compendium info in Companion dialog
 28-Nov-2020     v0.6.8: Use combinedTokensData on each extractedActor; that way we don't have to separate it
-                        (but still have to support the pre-0.6 method where it isn't associated with the actor)       
+                        (but still have to support the pre-0.6 method where it isn't associated with the actor)
                         combatants, updateObject(): Add rowNum to distinguish between same actorId instances
-30-Nov-2020     v0.6.9c: Add get id() so that we get unique identifer for the companion sheet   
-1-Dec-2020      v0.6.10: Move calculation/updating of combatants for display to getData() so it is re-rendered after update  
-                         Remove passing totalXPLine because it has to be updated as you add/remove combatants     
-                v0.6.11: update(): Update to new quickEncounter   
-14-Jan-2021     0.7.0c: REnamed to QESheet       
-16-Jan-2021     0.7.0d: Show a thumbnail of any saved tiles   
-19-Jan-2021     0.7.0f: On hover, show a - and Remove [name] for both Actors and Tiles       
+30-Nov-2020     v0.6.9c: Add get id() so that we get unique identifer for the companion sheet
+1-Dec-2020      v0.6.10: Move calculation/updating of combatants for display to getData() so it is re-rendered after update
+                         Remove passing totalXPLine because it has to be updated as you add/remove combatants
+                v0.6.11: update(): Update to new quickEncounter
+14-Jan-2021     0.7.0c: REnamed to QESheet
+16-Jan-2021     0.7.0d: Show a thumbnail of any saved tiles
+19-Jan-2021     0.7.0f: On hover, show a - and Remove [name] for both Actors and Tiles
 6-Feb-2021      0.7.3b: Put a Hide QE button on the QE dialog
 15-Mar-2021     0.8.0a: Proper Compendium Support
                         - See if you can get image info directly from the Compendium index; computeCombatantsForDisplay() now awaits on pack.getIndex
-31-Mar-2021     0.8.0b: If you're looking at a Compendium, pop a read-only QESheet    
-5-Jun-2021      0.8.1a: Fixed: Issue #42: _getHeaderButtons() was incorrectly checking closeButtonIndex to indicate it was found   
-                0.8.1b: _getHeaderButtons() was incorrectly comparing/replacing translated button labels, but apparently they are still in base language at this point                 
-9-Dec-2021      0.9.3c: Add checkbox to QE dialog if showAddToCombatTrackerCheckbox is set (and check it by default)  
+31-Mar-2021     0.8.0b: If you're looking at a Compendium, pop a read-only QESheet
+5-Jun-2021      0.8.1a: Fixed: Issue #42: _getHeaderButtons() was incorrectly checking closeButtonIndex to indicate it was found
+                0.8.1b: _getHeaderButtons() was incorrectly comparing/replacing translated button labels, but apparently they are still in base language at this point
+9-Dec-2021      0.9.3c: Add checkbox to QE dialog if showAddToCombatTrackerCheckbox is set (and check it by default)
                 _updateObject(): Changed format of formData names to rowNum.fieldName to accomodate the possible checkbox
-                TODO: Not currently saving it, even locally - will need to save and then persist  
-14-Dec-2021     0.9.3d: Add addToCombatTracker to combatant data model and persist       
+                TODO: Not currently saving it, even locally - will need to save and then persist
+14-Dec-2021     0.9.3d: Add addToCombatTracker to combatant data model and persist
 18-Dec-2021     0.9.4a: When you press "Run Quick Encounter" then submit form first before Running the QE (to capture the Add To CT status)
 29-Aug-2022     1.0.4g: Override the title to the name of the Journal Entry or Journal Page Entry (passed in options)
                 Weren't calling super() correctly; this.object stores the related object for which is the sheet
-31-Aug-2022     1.0.4j: constructor: receive options.qeJournalEntry so we don't need to look it up using journalEntryId (which is trickier now that we have multi-page journals) 
-2-Sep-2022      1.0.5a: activateListeners(): Listen for new [Add] button which allows adding selected tokens or tiles to this QE     
+31-Aug-2022     1.0.4j: constructor: receive options.qeJournalEntry so we don't need to look it up using journalEntryId (which is trickier now that we have multi-page journals)
+2-Sep-2022      1.0.5a: activateListeners(): Listen for new [Add] button which allows adding selected tokens or tiles to this QE
 11-Oct-2022     1.1.0b: _getHeaderButtons(): Don't have a Hide button in Foundry v10 and leave the button saying Close (as a replacement) - see Issue #108 for why
 20-Oct-2022     1.1.0e: Issue #116: QEs with embedded Compendium Entries don't run (added split off of trailing ID)
 2-Nov-2022      1.1.1d: Issue #40: Minimal implementation of RollTables - display the RollTable, add support for removing
 14-Nov-2022     1.1.1g: _updateObject(), _onChange(): Check for rollTable changes (e.g. changing number to die roll)
-29-May-2023     1.1.5b: Changed isFoundryV10Plus to isFoundryV10PlusPlus (to support checks for Foundry V11)  
+29-May-2023     1.1.5b: Changed isFoundryV10Plus to isFoundryV10PlusPlus (to support checks for Foundry V11)
 15-Nov-2023     1.2.2a: Fixed #137: Support more generalized dice rolls by changing dieRollReg check to Roll.validate() in _updateObject()
 21-May-2023     1.2.3c: computeCombatantsForDisplay() calls await generateTemplateExtractedActorTokenData() (because that is now async)
 17-Jun-2024     12.1.0b: In v12, convert mergeObject to foundry.util.mergeObject
@@ -59,7 +59,7 @@ export class QESheet extends FormApplication {
     }
 
     /** @override */
-//FIXME: Probably would be better to reference the Journal Entry this is for    
+//FIXME: Probably would be better to reference the Journal Entry this is for
 	get id() {
 	    return `${QE.MODULE_NAME}-${this.appId}`;
     }
@@ -87,8 +87,9 @@ export class QESheet extends FormApplication {
                 popOut : true,
                 width : 530,
                 height : "auto"
-            }); 
-        } else {
+            });
+        }
+        else {
             mergedObject = mergeObject(super.defaultOptions, {
                 //no longer setting id here because it gives the same element all the time- override get id() so we can have multiple QE JEs open
                 template : "modules/quick-encounters/templates/qe-sheet.html",
@@ -97,7 +98,7 @@ export class QESheet extends FormApplication {
                 popOut : true,
                 width : 530,
                 height : "auto"
-            }); 
+            });
         }
         return mergedObject;
     }
@@ -203,7 +204,7 @@ export class QESheet extends FormApplication {
                     numType : typeof eActor.numActors
                 }
 
-                if (eActor.dataPackName) {   
+                if (eActor.dataPackName) {
                     //Compendium: for display just use the index (can only get name, id, index)
                     const pack = game.packs.get(eActor.dataPackName);
                     //0.8.0a: Block on getting the name and image information, fortunately from the index
@@ -214,7 +215,8 @@ export class QESheet extends FormApplication {
                     const entry = index.find(e => e._id === strippedActorId);
                     combatant.img = entry?.img || CONST.DEFAULT_TOKEN;
                     combatant.actorName = entry?.name;
-                } else {      //regular actor
+                }
+                else {      //regular actor
                     const actor = game.actors.get(eActor.actorID);
                     //0.4.1: 5e specific: find XP for this number of this actor
                     const xp = QuickEncounter.getActorXP(actor);
@@ -234,7 +236,7 @@ export class QESheet extends FormApplication {
 
     /** @override */
     async _updateObject(event, formData) {
-        const checkIntReg = /^[0-9]*$/;   
+        const checkIntReg = /^[0-9]*$/;
         //Capture changes in the number of Actors or new Actors added (currently not possible through this dialog)
         let wasChanged = false;
         //0.9.3: Changed format of formData names to rowNum.fieldName
@@ -252,24 +254,29 @@ export class QESheet extends FormApplication {
                     //Option 1: You cleared the field or spaced it out
                     if ((numActors === null) || (numActors === "")) {
                         this.object.rollTables[rowNum].numActors = 0;
-                    } else if (Roll.validate(numActors)) {
+                    }
+                    else if (Roll.validate(numActors)) {
                         //Option 2: This is a dice roll (not guaranteed because it could just contain a dieRoll)
                         this.object.rollTables[rowNum].numActors = numActors;
-                    } else if (checkIntReg.test(numActors)) {
+                    }
+                    else if (checkIntReg.test(numActors)) {
                         const multiplier = parseInt(numActors,10);
                         if (!Number.isNaN(multiplier)) {
                             this.object.rollTables[rowNum].numActors = multiplier;
                         }
-                    } else {
+                    }
+                    else {
                         //otherwise leave unchanged - should pop up a dialog or highlight the field in red
                         const warning = game.i18n.localize("QE.QuickEncounterDialog.InvalidNumActors.WARNING") + " " + numActors;
                         ui.notifications.warn(warning);
                     }
                 }
-            } else if (rowNum >= this.combatants.length) {
+            }
+            else if (rowNum >= this.combatants.length) {
                 //New combatant - not possible in the dialog yet, but will be with drag-and-drop
                 fieldWasChanged = true;
-            } else if (fieldName === "numActors") {//1.1.1 only used for Extracted Actors
+            }
+            else if (fieldName === "numActors") {//1.1.1 only used for Extracted Actors
                 const numActors = fieldValue.trim();   //trim off whitespace
                 fieldWasChanged = (this.combatants[rowNum].numActors !== numActors);
                 if (fieldWasChanged) {
@@ -277,21 +284,25 @@ export class QESheet extends FormApplication {
                     //Option 1: You cleared the field or spaced it out
                     if ((numActors === null) || (numActors === "")) {
                         this.combatants[rowNum].numActors = 0;
-                    } else if (Roll.validate(numActors)) {
+                    }
+                    else if (Roll.validate(numActors)) {
                         //Option 2: This is a dice roll (not guaranteed because it could just contain a dieRoll)
                         this.combatants[rowNum].numActors = numActors;
-                    } else if (checkIntReg.test(numActors)) {
+                    }
+                    else if (checkIntReg.test(numActors)) {
                         const multiplier = parseInt(numActors,10);
                         if (!Number.isNaN(multiplier)) {
                              this.combatants[rowNum].numActors = multiplier;
                         }
-                    } else {
+                    }
+                    else {
                         //otherwise leave unchanged - should pop up a dialog or highlight the field in red
                         const warning = game.i18n.localize("QE.QuickEncounterDialog.InvalidNumActors.WARNING") + " " + numActors;
                         ui.notifications.warn(warning);
                     }
                 }
-            } else if (fieldName === "addToCombatTracker") {
+            }
+            else if (fieldName === "addToCombatTracker") {
                 fieldWasChanged = (this.combatants[rowNum].addToCombatTracker !== fieldValue);
                 this.combatants[rowNum].addToCombatTracker = fieldValue;
             }
@@ -328,7 +339,8 @@ export class QESheet extends FormApplication {
         //If we removed all the Actors and (0.7.0) all the Tiles and (1.1.1) all the RollTables, then remove the whole Quick Encounter
         if (extractedActors.length || this.object?.savedTilesData?.length || this.object?.rollTables?.length) {
             this.object?.update({extractedActors : extractedActors});
-        } else {
+        }
+        else {
             //1.0.4j: Pass qeJournalEntry so we don't have to look it up via ID
             this.object?.remove(this.options.qeJournalEntry);
             //And close this sheet
@@ -367,7 +379,7 @@ export class QESheet extends FormApplication {
             }
             this._onChange();
         }
-            
+
     }
     _onClickRollTable(event) {
         event.stopPropagation();
@@ -384,9 +396,7 @@ export class QESheet extends FormApplication {
             }
             this._onChange();
         }
-            
+
     }
 
 }//end class QESHeet
-
-
