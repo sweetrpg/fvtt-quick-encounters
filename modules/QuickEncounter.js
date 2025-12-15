@@ -361,7 +361,8 @@ export class QuickEncounter {
             //1.2.3d: Replace v12 mergeObject with foundry.utils version
             if (QuickEncounter.isFoundryV12Plus) {
                 quickEncounter = foundry.utils.mergeObject(quickEncounter, quickEncounterFromData);
-            } else {
+            }
+            else {
                 quickEncounter = mergeObject(quickEncounter, quickEncounterFromData);
             }
             //v0.6.1: Backwards compatibility - set the isSavedToken flag
@@ -388,7 +389,8 @@ export class QuickEncounter {
         //1.2.3d: Replace v12 mergeObject with foundry.utils version
         if (QuickEncounter.isFoundryV12Plus) {
             foundry.utils.mergeObject(this, newQEData);
-        } else {
+        }
+        else {
             mergeObject(this, newQEData);
         }
         //Update into Journal Entry
@@ -530,11 +532,13 @@ export class QuickEncounter {
         QuickEncounter.isFoundryV13Plus = (game.data.release?.generation >= 13);
     }
 
-
-    static getSceneControlButtons(buttons) {
+    static getSceneControlButtons(controls) {
         if (!game.user.isGM) {return;}
+
         //Hooked on the left-hand set of buttons; add a Create Quick Encounter one
-        const basicControlsButton = buttons.find(b => b.name === "token");
+        const basicControlsButton = QuickEncounter.isFoundryV13Plus ? // 12.2.0: check for v13
+            controls.tokens :
+            controls.find(b => b.name === "token");
 
         if (basicControlsButton) {
             basicControlsButton.tools.push({
@@ -548,7 +552,9 @@ export class QuickEncounter {
             });
         }
 
-        const tileControlsButton = buttons.find(b => b.name === "tiles");
+        const tileControlsButton = QuickEncounter.isFoundryV13Plus ? // 12.2.0: check for v13
+            controls.tiles :
+            controls.find(b => b.name === "tiles");
 
         if (tileControlsButton) {
             tileControlsButton.tools.push({
@@ -569,7 +575,8 @@ export class QuickEncounter {
         let FRIENDLY_TOKEN_DISPOSITIONS;
         if (QuickEncounter.isFoundryV8Plus) {
             FRIENDLY_TOKEN_DISPOSITIONS = CONST.TOKEN_DISPOSITIONS.FRIENDLY;
-        } else {//0.7.x
+        }
+        else {//0.7.x
             FRIENDLY_TOKEN_DISPOSITIONS = TOKEN_DISPOSITIONS.FRIENDLY;
         }
         //Called when you press the Quick Encounters button (crossed-swords) from the sidebar
@@ -1430,7 +1437,8 @@ export class QuickEncounter {
                 const strippedActorId = (eActor.actorID).split(".").pop();
                 actor = await game.actors.importFromCompendium(actorPack,strippedActorId, {}, {renderSheet: false});
             }
-        } else {
+        }
+        else {
             actor = game.actors.get(eActor.actorID);
         }
         return actor;
@@ -1669,7 +1677,8 @@ export class QuickEncounter {
         let createdTiles;
         if (QuickEncounter.isFoundryV8Plus) {
             createdTiles = shiftedTilesData.length ? await canvas.scene.createEmbeddedDocuments("Tile", shiftedTilesData) : [];
-        } else {
+        }
+        else {
             createdTiles = await Tile.create(QuickEncounter.isFoundryV12Plus ? foundry.utils.duplicate(shiftedTilesData) : duplicate(shiftedTilesData));
         }
 
@@ -1718,7 +1727,8 @@ export class QuickEncounter {
             for (const token of encounterTokens) {
                 if (QuickEncounter.isFoundryV8Plus) {//0.8.0e:
                     tokenObject = token.object;
-                } else {//Foundry 0.7.x
+                }
+                else {//Foundry 0.7.x
                     tokenObject = token;
                 }
                 tokenObject.release();
@@ -2174,9 +2184,8 @@ Hooks.on('closeJournalSheet', async (journalSheet, html) => {
     delete journalEntry.clickedNote;
 });
 
-
 //1.0.4c: Foundry v10.277 - support for multipage Journal
-Hooks.on(`renderJournalPageSheet`, QuickEncounter.onRenderJournalPageSheet )
+Hooks.on(`renderJournalPageSheet`, QuickEncounter.onRenderJournalPageSheet);
 //Don't have to worry about Tutorial (deal with that on close Journal Entry)
 Hooks.on('closeJournalPageSheet', async (journalPageSheet, html) => {
     if (!game.user.isGM) {return;}
@@ -2190,8 +2199,8 @@ Hooks.on('closeJournalPageSheet', async (journalPageSheet, html) => {
     delete journalEntryPage.clickedNote;
 });
 
-
 Hooks.on("getJournalSheetHeaderButtons", QuickEncounter.getJournalSheetHeaderButtons);
+Hooks.on("getHeaderControlsApplicationV2", QuickEncounter.getJournalSheetHeaderButtons); // 12.2.0: Foundry v13
 Hooks.on("init", QuickEncounter.init);
 Hooks.on('getSceneControlButtons', QuickEncounter.getSceneControlButtons);
 Hooks.on("deleteCombat", (combat, options, userId) => {
