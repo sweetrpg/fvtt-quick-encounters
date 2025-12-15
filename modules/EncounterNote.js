@@ -140,7 +140,9 @@ export class EncounterNote {
         //v0.5.0: Switch to Note.create() to bypass the Note dialog
         //This is different from the JournalEntry._onDropData approach
         //0.9.3f: Remove deprecation warning by using createEmbeddedDocuments()
-        let newNote = QuickEncounter.isFoundryV8Plus ? await canvas.scene.createEmbeddedDocuments("Note",[noteData]) : await Note.create(noteData);
+        let newNote = QuickEncounter.isFoundryV8Plus ?
+            await canvas.scene.createEmbeddedDocuments("Note",[noteData]) :
+            await Note.create(noteData);
         //1.0.2c: createEmbeddedDocuments returns an array, and we just want a single element
         if (Array.isArray(newNote)) {newNote = newNote[0];}
         newNote._sheet = new EncounterNoteConfig(newNote);
@@ -156,10 +158,14 @@ export class EncounterNote {
         let numNotesDeleted = 0;
         for (const scene of game.scenes) {
             if (QuickEncounter.isFoundryV10Plus) {
-                matchingNoteIds = Array.from(scene.notes?.values()).filter(nd => nd.entryId === journalEntry.id).map(note => note.id);
+                matchingNoteIds = Array.from(scene.notes?.values())
+                    .filter(nd => nd.entryId === journalEntry.id)
+                    .map(note => note.id);
             }
             else if (QuickEncounter.isFoundryV8Plus) {
-                matchingNoteIds = Array.from(scene.data.notes.values()).filter(nd => nd.data.entryId === journalEntry.id).map(note => note.id);
+                matchingNoteIds = Array.from(scene.data.notes.values())
+                    .filter(nd => nd.data.entryId === journalEntry.id)
+                    .map(note => note.id);
             }
             else {
                 matchingNoteIds = scene.data.notes.filter(nd => nd.entryId === journalEntry.id).map(note => note._id);
@@ -242,7 +248,8 @@ export class EncounterNote {
         if (!journalEntry) {return null;}
         //1.0.4k: Use parent (which is what is saved to the map) if this is JournalEntryPage
         //1.0.7a: Check for FoundryV10
-        const parentJournalEntry = (QuickEncounter.isFoundryV10Plus && (journalEntry instanceof JournalEntryPage)) ? journalEntry.parent : journalEntry;
+        const parentJournalEntry = (QuickEncounter.isFoundryV10Plus && (journalEntry instanceof JournalEntryPage)) ?
+            journalEntry.parent : journalEntry;
         //if sceneNote is available, then we're in the Note Scene already
         if (parentJournalEntry.sceneNote) {return game.scenes.viewed;}
         else {
@@ -317,7 +324,8 @@ export class EncounterNote {
         if (!qeScene || !journalEntry) {return false;}
         //1.0.4k: Use parent (which is what is saved to the map) if this is JournalEntryPage
         //1.0.7a: Check for FoundryV10
-        const parentJournalEntry = (QuickEncounter.isFoundryV10Plus && (journalEntry instanceof JournalEntryPage)) ? journalEntry.parent : journalEntry;
+        const parentJournalEntry = (QuickEncounter.isFoundryV10Plus && (journalEntry instanceof JournalEntryPage)) ?
+            journalEntry.parent : journalEntry;
         //If we're viewing the relevant scene and the map note was placed, then good
         if (parentJournalEntry.sceneNote) {return true;}
 

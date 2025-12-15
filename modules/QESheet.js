@@ -80,7 +80,8 @@ export class QESheet extends FormApplication {
         let mergedObject;
         if (QuickEncounter.isFoundryV12Plus) {
             mergedObject = foundry.utils.mergeObject(super.defaultOptions, {
-                //no longer setting id here because it gives the same element all the time- override get id() so we can have multiple QE JEs open
+                // no longer setting id here because it gives the same element all the time-
+                // override get id() so we can have multiple QE JEs open
                 template : "modules/quick-encounters/templates/qe-sheet.html",
                 closeOnSubmit : false,
                 submitOnClose : false,
@@ -91,7 +92,8 @@ export class QESheet extends FormApplication {
         }
         else {
             mergedObject = mergeObject(super.defaultOptions, {
-                //no longer setting id here because it gives the same element all the time- override get id() so we can have multiple QE JEs open
+                // no longer setting id here because it gives the same element all the time-
+                // override get id() so we can have multiple QE JEs open
                 template : "modules/quick-encounters/templates/qe-sheet.html",
                 closeOnSubmit : false,
                 submitOnClose : false,
@@ -112,7 +114,8 @@ export class QESheet extends FormApplication {
     _getHeaderButtons() {
         let buttons = super._getHeaderButtons();
         let closeButtonIndex = buttons.findIndex(button => button.label === "Close");
-        // 1.1.0b: Don't have a Hide button in Foundry v10 and leave the button saying Close (as a replacement) - see Issue #108 for why
+        // 1.1.0b: Don't have a Hide button in Foundry v10 and leave the button saying Close (as a replacement) -
+        // see Issue #108 for why
         if (QuickEncounter.isFoundryV10Plus) {return buttons;}
 
         //0.8.1: Issue #42: closeButtonIndex==-1 if not found
@@ -193,7 +196,7 @@ export class QESheet extends FormApplication {
                     numActors : eActor.numActors,
                     actorName: eActor.name,             //default
                     actorId: eActor.actorID,
-                    //0.9.3d Add addToCombatTracker to structure (defaults to true and may not be shown)
+                    // 0.9.3d Add addToCombatTracker to structure (defaults to true and may not be shown)
                     addToCombatTracker: eActor.addToCombatTracker ?? true,
                     dataPackName : eActor.dataPackName, //non-null if a Compendium entry
                     tokens: eActor.combinedTokensData,
@@ -201,10 +204,11 @@ export class QESheet extends FormApplication {
                 }
 
                 if (eActor.dataPackName) {
-                    //Compendium: for display just use the index (can only get name, id, index)
+                    // Compendium: for display just use the index (can only get name, id, index)
                     const pack = game.packs.get(eActor.dataPackName);
-                    //0.8.0a: Block on getting the name and image information, fortunately from the index
-                    //FIXME: Probably could be improved by getting all the indexes in one group so not doing this multiple times for the same index
+                    // 0.8.0a: Block on getting the name and image information, fortunately from the index
+                    // FIXME: Probably could be improved by getting all the indexes in one group so not doing this
+                    // multiple times for the same index
                     const index = await pack.getIndex();
                     //1.1.0e: In Foundry v10 may need to strip off prepended Compendium name
                     const strippedActorId = (combatant.actorId).split(".").pop();
@@ -316,16 +320,17 @@ export class QESheet extends FormApplication {
     async _onChange() {
         //Reconstitute extractedActors and update it, removing those with numActors=0
         //Accept any non-numeric; blank has been replaced with 0
-        const extractedActors = this.combatants.filter(c => (typeof c.numActors !== "number") || (c.numActors > 0)).map(c => {
-            return {
-                numActors : c.numActors,
-                dataPackName : c.dataPackName, //if non-null then this is a Compendium reference
-                actorID : c.actorId,           //If Compendium sometimes this is the reference
-                name : c.actorName,
-                addToCombatTracker : c.addToCombatTracker,  //remembered checked/cleared setting (will only display if overall setting shows the dialog box)
-                savedTokensData : c.tokens.filter(td => td.isSavedToken)
-            }
-        });
+        const extractedActors = this.combatants.filter(c => (typeof c.numActors !== "number") || (c.numActors > 0))
+            .map(c => {
+                return {
+                    numActors : c.numActors,
+                    dataPackName : c.dataPackName, //if non-null then this is a Compendium reference
+                    actorID : c.actorId,           //If Compendium sometimes this is the reference
+                    name : c.actorName,
+                    addToCombatTracker : c.addToCombatTracker,  //remembered checked/cleared setting (will only display if overall setting shows the dialog box)
+                    savedTokensData : c.tokens.filter(td => td.isSavedToken)
+                }
+            });
         //0.6.1o: The saved tokens for a removed ExtractedActor will now be discarded also
 
         //1.1.1: Check for changes in RollTables
