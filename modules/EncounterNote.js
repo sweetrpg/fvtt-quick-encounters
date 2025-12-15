@@ -92,8 +92,6 @@ const moreNoteIcons = {
 }
 Object.assign(CONFIG.JournalEntry.noteIcons, moreNoteIcons);
 
-
-
 export class EncounterNoteConfig extends NoteConfig {
     /** @override  */
     //WARNING: Do not add submitOnClose=true because that will create a submit loop
@@ -189,7 +187,6 @@ export class EncounterNote {
                 }
             });
         }
-
     }
 
     static dialogPrompt({title, content, label, callback}={}, options={}) {

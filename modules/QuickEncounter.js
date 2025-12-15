@@ -277,7 +277,6 @@ export const QE = {
     ACTOR : "Actor"
 }
 
-
 //Matches "ndx+/-m" with/without spaces at the beginning of the string
 export const dieRollReg = /^([0-9]+\s*d[4,6,8,10,12](?:\s*[+,-]\s*[0-9]+)*)/;
 
@@ -414,7 +413,6 @@ export class QuickEncounter {
         }
         return false;
     }
-
 
     static init() {
         game.settings.register(QE.MODULE_NAME, "quickEncountersVersion", {
@@ -774,7 +772,6 @@ export class QuickEncounter {
         if (openJournalEntry.sheet) {openJournalEntry.sheet.render(true);}
     }
 
-
     async add(controlledAssets) {
         const controlledTokens = controlledAssets?.tokens;
         const controlledTiles = controlledAssets?.tiles;
@@ -811,7 +808,6 @@ export class QuickEncounter {
         //v0.6.1k Update the created/changed QuickEncounter into the Journal Entry
         this.serializeIntoJournalEntry();
     }
-
 
     addTokens(controlledTokens) {
         if (!controlledTokens) return;
@@ -940,8 +936,6 @@ export class QuickEncounter {
         }
     }
 
-
-
     static async showTutorialJournalEntry() {
         //0.5.0: Check if there's an existing open Tutorial
         const existingTutorial = QuickEncounter.findOpenQETutorial();
@@ -980,7 +974,6 @@ export class QuickEncounter {
         const ejSheet = new JournalSheet(journalEntry);
         ejSheet.render(true);
     }
-
 
     /* Method 2: Look through open Windows to find a Journal Entry with Actors and a Map Note
     *
@@ -1042,8 +1035,6 @@ export class QuickEncounter {
             return qeTutorial;
         }
     }
-
-
 
     static extractQuickEncounter(journalSheet, htmlElements) {
         const journalEntry = journalSheet?.object;
@@ -1180,9 +1171,6 @@ export class QuickEncounter {
 
         return {extractedActors, extractedRollTables};
     }
-
-
-
 
     /* RUN the Quick Encounter (by using the embedded button or the side button)
         - Recall the saved tokens data
@@ -1388,9 +1376,6 @@ export class QuickEncounter {
         }
     }
 
-
-
-
     static async getNumActors(extractedActor, options={}) {
         //Get the number of actors including rolling if options.rollRandom=true
         let multiplier = extractedActor.numActors;
@@ -1420,7 +1405,6 @@ export class QuickEncounter {
         return numActors;
     }
 
-
     static async getActor(eActor) {
         //Could be from Actors or Compendium
         //v0.6 Need to check whether this is a direct Actor reference or from a Compendium
@@ -1443,7 +1427,6 @@ export class QuickEncounter {
         }
         return actor;
     }
-
 
     async generateTemplateExtractedActorTokenData() {
         //0.6.1d: Create a template array so we can tell how many saved vs. generated tokens we will have at display time
@@ -1602,8 +1585,6 @@ export class QuickEncounter {
             encounterTokens = Array.isArray(tempCreatedTokens) ? tempCreatedTokens : [tempCreatedTokens];
         }
 
-
-
         //0.9.0 Move if (freezeCapturedTokens) outside the loop
         //0.9.3 Move it back in because we're using the loop to remember addToCombatTracker also
         //v0.6.1d: If it's a savedToken (one that was "captured" then check if it should be frozen as is or regenerated for example by Token Mold)
@@ -1693,7 +1674,6 @@ export class QuickEncounter {
             //In v12, don't control tokens and toggle combat state - just use createCombatant()
             //Modeled after Foundry v12 deprecated toggleCombat
             TokenDocument.implementation.createCombatants(encounterTokens.filter(t => t.addToCombatTracker));
-
         }
         else {//Foundry v11 and before
             //0.9.3d Find the first token to be added to the Combat Tracker and work around that
@@ -1738,7 +1718,6 @@ export class QuickEncounter {
         //Pop-open the floating combat tracker
         //0.6: Moved after toggling combat in case that actually creates the combat entity
         tabApp.renderPopout(tabApp);
-
     }
 
     static async onDeleteCombat(combat, options, userId) {
@@ -1775,7 +1754,6 @@ export class QuickEncounter {
         //If the "Delete Tokens after Combat" option is set, ask with a two option dialog
         const showDeleteTokensDialogAfterCombat = game.settings.get(QE.MODULE_NAME, "showDeleteTokensDialogAfterCombat");
         if (showDeleteTokensDialogAfterCombat) {await QuickEncounter.deleteTokensAfterCombatDialog(hostileNPCCombatants, defeatedHostileNPCCombatants);}
-
     }
 
     static async displayXP(hostileNPCCombatants, pcTokens) {
@@ -1819,7 +1797,6 @@ export class QuickEncounter {
             buttonLabels : ["QE.DeleteTokensAfterCombat.DELETEALL",  "QE.DeleteTokensAfterCombat.DELETEDEFEATED"]
         });
     }
-
 
     static getActorXP(actor) {
         if ((game.system.id !== "dnd5e") || !actor) {return null;}
@@ -1987,7 +1964,6 @@ export class QuickEncounter {
         if (quickEncounter) {
             quickEncounter.displayQEDialog(journalPageSheet, html);
         }
-
     }
 
     displayQEDialog(journalSheet, html) {
@@ -2049,8 +2025,6 @@ export class QuickEncounter {
             this.run(event);
         });
     }
-
-
 }
 
 export class Dialog3 extends Dialog {
@@ -2117,7 +2091,6 @@ export class Dialog3 extends Dialog {
         }
     }
 }
-
 
 /** HOOKS */
 //0.6.13: Can't hook on actually clicking on the Note, so on hoverIn/hoverOut we record which Note we're on

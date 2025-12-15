@@ -103,7 +103,6 @@ export class QESheet extends FormApplication {
         return mergedObject;
     }
 
-
     /** @override */
     async _render(force, options={}) {
         return super._render(force, options);
@@ -162,9 +161,6 @@ export class QESheet extends FormApplication {
             this.submit({preventClose: true}).then(QuickEncounter.runAddOrCreate(event, this.object));
         });
     }
-
-
-
 
     /** @override */
     async getData() {
@@ -335,7 +331,6 @@ export class QESheet extends FormApplication {
         //1.1.1: Check for changes in RollTables
         //We updated directly above so the only additional check would be to remove entries if they are zeroed out
 
-
         //If we removed all the Actors and (0.7.0) all the Tiles and (1.1.1) all the RollTables, then remove the whole Quick Encounter
         if (extractedActors.length || this.object?.savedTilesData?.length || this.object?.rollTables?.length) {
             this.object?.update({extractedActors : extractedActors});
@@ -364,6 +359,7 @@ export class QESheet extends FormApplication {
             this._onChange();
         }
     }
+
     _onClickTile(event) {
         event.stopPropagation();
 
@@ -379,8 +375,8 @@ export class QESheet extends FormApplication {
             }
             this._onChange();
         }
-
     }
+
     _onClickRollTable(event) {
         event.stopPropagation();
 
@@ -396,7 +392,5 @@ export class QESheet extends FormApplication {
             }
             this._onChange();
         }
-
     }
-
 }//end class QESHeet
