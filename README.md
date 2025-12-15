@@ -80,7 +80,7 @@ Coming soon: Drag-and-drop for tokens, tiles, and other stuff!
 ![QuickEncounterDialog](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/img/CompanionDialog.png)
 
 ## Contributions
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T82XFQD)
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/paulyhedral)
 
 ## License
 **Quick Encounters for Foundry VTT** by Jeffrey Pugh is licensed under the [GNU General Public License v3.0](https://github.com/sweetrpg/fvtt-quick-encounters/blob/master/LICENSE)
